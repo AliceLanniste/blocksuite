@@ -119,7 +119,7 @@ export class EdgelessBlockPortalNote extends EdgelessPortalBase<NoteBlockModel> 
       left: `${-extra}px`,
       top: `${-extra}px`,
       width: `${modelW + extra * 2}px`,
-      height: `calc(100% + ${extra * 2}px)`,
+      height: `${modelH + extra * 2}px`,
       borderRadius: '8px',
       transition: this._transition,
       background: isHiddenNote
