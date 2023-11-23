@@ -421,8 +421,9 @@ export class EdgelessSelectedRect extends WithDisposable(LitElement) {
         if (height < NOTE_MIN_HEIGHT) {
           height = NOTE_MIN_HEIGHT;
         }
+        console.log('new=bound', bound.h);
         edgeless.updateElementInLocal(element.id, {
-          xywh: serializeXYWH(bound.x, bound.y, bound.w, height),
+          xywh: serializeXYWH(bound.x, bound.y, bound.w, bound.h),
         });
       } else if (isFrameBlock(element)) {
         edgeless.updateElementInLocal(element.id, {
@@ -521,9 +522,7 @@ export class EdgelessSelectedRect extends WithDisposable(LitElement) {
         this._cursorRotate += angle || 0;
         cursor = generateCursorUrl(this._cursorRotate).toString();
       } else {
-        if (this.resizeMode === 'edge') {
-          cursor = 'ew';
-        } else if (target && point) {
+        if (target && point) {
           const label = getResizeLabel(target);
           const { width, height, left, top } = this._selectedRect;
           if (
