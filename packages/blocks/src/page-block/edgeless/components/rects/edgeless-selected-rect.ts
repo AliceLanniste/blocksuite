@@ -421,7 +421,6 @@ export class EdgelessSelectedRect extends WithDisposable(LitElement) {
         if (height < NOTE_MIN_HEIGHT) {
           height = NOTE_MIN_HEIGHT;
         }
-        console.log('new=bound', bound.h);
         edgeless.updateElementInLocal(element.id, {
           xywh: serializeXYWH(bound.x, bound.y, bound.w, bound.h),
         });

@@ -424,8 +424,6 @@ export class HandleResizeManager {
           fixedPoint.y = maxY;
           draggingPoint.y = maxY + deltaY;
           rect.h = fixedPoint.y - draggingPoint.y;
-          console.log('top', rect.h);
-          // rect.h = draggingPoint.y - fixedPoint.y;
           break;
         }
 
@@ -433,7 +431,6 @@ export class HandleResizeManager {
           direction.y = 1;
           fixedPoint.y = minY;
           draggingPoint.y = maxY + deltaY;
-          // rect.h = fixedPoint.y - draggingPoint.y;
           rect.h = draggingPoint.y - fixedPoint.y;
           break;
         }
@@ -449,8 +446,9 @@ export class HandleResizeManager {
       }
 
       rect.cx = (draggingPoint.x + fixedPoint.x) / 2;
+      scale.y = rect.h / original.h;
+      flip.y = scale.y < 0 ? -1 : 1;
       rect.cy = (draggingPoint.y + fixedPoint.y) / 2;
-      // console.log('rect.cy', rect.cy);
     }
 
     const width = Math.abs(rect.w);
@@ -462,7 +460,6 @@ export class HandleResizeManager {
     _currentRect.y = y;
     _currentRect.width = width;
     _currentRect.height = height;
-    console.log('rect.cy', rect.cy, height, y);
     const newBounds = new Map<
       string,
       {
