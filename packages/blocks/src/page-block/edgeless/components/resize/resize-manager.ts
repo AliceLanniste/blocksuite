@@ -6,7 +6,7 @@ import {
   getQuadBoundsWithRotation,
   rotatePoints,
 } from '../../../../surface-block/index.js';
-import { NOTE_MIN_WIDTH } from '../../utils/consts.js';
+import { NOTE_MIN_HEIGHT, NOTE_MIN_WIDTH } from '../../utils/consts.js';
 import { HandleDirection, type ResizeMode } from './resize-handles.js';
 
 // 15deg
@@ -448,6 +448,9 @@ export class HandleResizeManager {
       rect.cx = (draggingPoint.x + fixedPoint.x) / 2;
       scale.y = rect.h / original.h;
       flip.y = scale.y < 0 ? -1 : 1;
+      if (Math.abs(rect.h) < NOTE_MIN_HEIGHT) {
+        rect.h = NOTE_MIN_HEIGHT;
+      }
       rect.cy = (draggingPoint.y + fixedPoint.y) / 2;
     }
 
