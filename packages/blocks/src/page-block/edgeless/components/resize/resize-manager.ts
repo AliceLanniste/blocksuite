@@ -422,7 +422,7 @@ export class HandleResizeManager {
         case HandleDirection.Top: {
           direction.y = -1;
           fixedPoint.y = maxY;
-          draggingPoint.y = maxY + deltaY;
+          draggingPoint.y = minY + deltaY;
           rect.h = fixedPoint.y - draggingPoint.y;
           break;
         }
@@ -449,11 +449,12 @@ export class HandleResizeManager {
       scale.y = rect.h / original.h;
       flip.y = scale.y < 0 ? -1 : 1;
       if (Math.abs(rect.h) < NOTE_MIN_HEIGHT) {
-        rect.h = NOTE_MIN_HEIGHT;
+        rect.h = NOTE_MIN_HEIGHT * flip.y;
+        scale.y = rect.h / original.h;
+        draggingPoint.y = fixedPoint.y + rect.h * direction.y;
       }
       rect.cy = (draggingPoint.y + fixedPoint.y) / 2;
     }
-
     const width = Math.abs(rect.w);
     const height = Math.abs(rect.h);
     const x = rect.cx - width / 2;
@@ -625,7 +626,6 @@ export class HandleResizeManager {
   ) => {
     // Prevent selection action from being triggered
     e.stopPropagation();
-
     this._locked = false;
     this._target = e.target as HTMLElement;
     this._dragDirection = direction;

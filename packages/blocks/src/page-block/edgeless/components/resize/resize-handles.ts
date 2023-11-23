@@ -176,7 +176,7 @@ export function ResizeHandles(
     case 'edge': {
       const { handleLeft, handleRight } = getEdgeHandles();
       const { handleTop, handleBottom } = getEdgeVerticalHandles();
-      return html`${handleLeft} ${handleRight} ${handleTop} ${handleBottom}`;
+      return html` ${handleTop}${handleLeft} ${handleRight} ${handleBottom}`;
     }
     case 'all': {
       const {
